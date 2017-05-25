@@ -37,7 +37,7 @@ app.use(passport.session());
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-    callbackURL: "https://www.pin-a-pic.herokuapp.com/auth/twitter/callback"
+    callbackURL: "https://pin-a-pic.herokuapp.com/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, cb) {
     User.findOne({ twitterId: profile.id }, function (err, user) {
