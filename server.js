@@ -43,7 +43,7 @@ passport.use(new TwitterStrategy({
     User.findOne({ twitterId: profile.id }, function (err, user) {
       if (err) throw err;
       if (!user) {
-        User.create({twitterID: profile.id})
+        User.create({twitterId: profile.id})
       }
       return cb(err, user);
     });
