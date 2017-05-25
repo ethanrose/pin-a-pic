@@ -43,7 +43,9 @@ passport.use(new TwitterStrategy({
     User.findOne({ twitterId: profile.id }, function (err, user) {
       if (err) throw err;
       if (!user) {
-        User.create({twitterId: profile.id})
+        console.log(JSON.stringify(profile))
+        User.create({twitterId: profile.twitterId})
+        return cb(null, user)
       }
       return cb(err, user);
     });
@@ -54,7 +56,7 @@ app.get('/auth/twitter',
   passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback', 
-  passport.authenticate('twitter'),
+  passport.authenticate('twitter', {failureRedirect: '/login'}),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
