@@ -40,11 +40,11 @@ passport.use(new TwitterStrategy({
     callbackURL: "https://pin-a-pic.herokuapp.com/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, cb) {
-    User.findOne({ twitterId: profile.twitterId }, function (err, user) {
+    User.findOne({ twitterId: profile.username }, function (err, user) {
       if (err) throw err;
       if (!user) {
         console.log(JSON.stringify(profile))
-        User.create({twitterId: profile.twitterId})
+        User.create({twitterId: profile.username})
         return cb(null, user)
       }
       return cb(err, user);
